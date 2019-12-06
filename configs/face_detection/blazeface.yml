@@ -14,6 +14,18 @@ weights: output/blazeface/model_final/
 # 1(label_class) + 1(background)
 num_classes: 2
 
+### nas config
+reduce_rate: 0.85
+init_temperature: 10.24
+is_server: true
+max_flops: 2042262389 ## 640 origin blazeface
+retain_epoch: 2
+#retain_iter: 8050 #1610
+search_steps: 100
+server_ip: ""
+server_port: 8899
+### nas end
+
 BlazeFace:
   backbone: BlazeNet
   output_decoder:
@@ -47,9 +59,10 @@ SSDTrainFeed:
   batch_size: 8
   use_process: True
   dataset:
-    dataset_dir: dataset/wider_face
-    annotation: wider_face_split/wider_face_train_bbx_gt.txt
-    image_dir: WIDER_train/images
+    #dataset_dir: dataset/wider_face
+    dataset_dir:
+    annotation: dataset/wider_face/wider_face_split/wider_face_train_bbx_gt.txt
+    image_dir: dataset/wider_face/WIDER_train/images
   image_shape: [3, 640, 640]
   sample_transforms:
   - !DecodeImage
